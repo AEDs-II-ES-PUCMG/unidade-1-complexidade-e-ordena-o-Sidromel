@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Random;
 
 public class App {
@@ -57,12 +56,12 @@ public class App {
         System.out.println("Comparações: " + bolha.getComparacoes());
         System.out.println("Movimentações: " + bolha.getMovimentacoes());
         System.out.println("Tempo de ordenação (ms): " + bolha.getTempoOrdenacao());
-        System.out.println("\n----------------------------------------------");
+        System.out.println("\n----------------------------------------------------");
         System.out.println("\nSistema no vetor ordenado pelo método InsertonSort:");
         System.out.println("Comparações: " + insertSort.getComparacoes());
         System.out.println("Movimentações: " + insertSort.getMovimentacoes());
         System.out.println("Tempo de ordenação (ms): " + insertSort.getTempoOrdenacao());
-        System.out.println("\n----------------------------------------------");
+        System.out.println("\n----------------------------------------------------");
         System.out.println("\nSistema no vetor ordenado pelo método Selectionsort:");
         System.out.println("Comparações: " + selectionSort.getComparacoes());
         System.out.println("Movimentações: " + selectionSort.getMovimentacoes());
