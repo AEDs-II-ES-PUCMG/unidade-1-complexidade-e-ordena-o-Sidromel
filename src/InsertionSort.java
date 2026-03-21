@@ -1,6 +1,7 @@
 import java.util.Arrays;
 
 public class InsertionSort<T extends Comparable<T>> implements IOrdenador<T> {
+    
     private int comparacoes;
     private int movimentacoes;
     private double tempoOrdenacao;
@@ -32,14 +33,14 @@ public class InsertionSort<T extends Comparable<T>> implements IOrdenador<T> {
     private void terminar(){
         this.tempoOrdenacao = (System.nanoTime() - this.inicio) * nanoToMilli;
     }
-
+/*
     private void swap(int x, int y, T[] vetor) {
         T temp = vetor[x];
         vetor[x] = vetor[y];
         vetor[y] = temp;
         movimentacoes+=3;
     }
-
+*/
     @Override
     public T[] ordenar(T[] dados) {
         T[] dadosOrdenados = Arrays.copyOf(dados, dados.length);
