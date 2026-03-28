@@ -52,24 +52,31 @@ public class App {
 
         Integer[] vetorSelection = selectionSort.ordenar(vetor);
 
+        MergeSort<Integer> mergeSort = new MergeSort<>();
+
+        Integer[] vetorMerge = mergeSort.ordenar(vetor);
+
         System.out.println("\nSistema no vetor ordenado pelo método BubbleSort:");
         System.out.println("Comparações: " + bolha.getComparacoes());
         System.out.println("Movimentações: " + bolha.getMovimentacoes());
         System.out.println("Tempo de ordenação (ms): " + bolha.getTempoOrdenacao());
+        
         System.out.println("\n----------------------------------------------------");
         System.out.println("\nSistema no vetor ordenado pelo método InsertonSort:");
         System.out.println("Comparações: " + insertSort.getComparacoes());
         System.out.println("Movimentações: " + insertSort.getMovimentacoes());
         System.out.println("Tempo de ordenação (ms): " + insertSort.getTempoOrdenacao());
+        
         System.out.println("\n----------------------------------------------------");
         System.out.println("\nSistema no vetor ordenado pelo método Selectionsort:");
         System.out.println("Comparações: " + selectionSort.getComparacoes());
         System.out.println("Movimentações: " + selectionSort.getMovimentacoes());
         System.out.println("Tempo de ordenação (ms): " + selectionSort.getTempoOrdenacao());
-
-        /* TO DO
-        *Fazer a implementacao do restante do main para a ordenacao 
-        *  com os algoritmos InsertionSort e SelectionSort
-        */
+-
+        System.out.println("\n----------------------------------------------------");
+        System.out.println("\nSistema no vetor ordenado pelo método Mergesort:");
+        System.out.println("Comparações: " + mergeSort.getComparacoes());
+        System.out.println("Movimentações: " + mergeSort.getMovimentacoes());
+        System.out.println("Tempo de ordenação (ms): " + mergeSort.getTempoOrdenacao());
     }
 }

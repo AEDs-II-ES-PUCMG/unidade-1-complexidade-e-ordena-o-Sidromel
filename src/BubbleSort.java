@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class BubbleSort<T extends Comparable<T>> implements IOrdenador<T>{
+public class BubbleSort<T extends Comparable<T>> implements IOrdenador<T> {
 
     private int comparacoes;
     private int movimentacoes;
