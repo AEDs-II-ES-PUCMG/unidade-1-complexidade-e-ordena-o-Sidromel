@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class App {
     static final int[] tamanhosTesteGrande =  { 31_250_000, 62_500_000, 125_000_000, 250_000_000, 500_000_000 };
@@ -37,46 +38,48 @@ public class App {
 
 
     public static void main(String[] args) {
-        int tam = 20;
-        Integer[] vetor = gerarVetorObjetos(tam);
+        Scanner teclado = new Scanner(System.in);
+        int opcao = -1;
 
-        BubbleSort<Integer> bolha = new BubbleSort<>();
+        for (int n : tamanhosTesteMedio) {
+            Integer[] vetorBase = gerarVetorObjetos(n);
 
-        Integer[] vetorOrdenadoBolha = bolha.ordenar(vetor);
-
-        InsertionSort<Integer> insertSort = new InsertionSort<>();
-
-        Integer[] vetoIntegers = insertSort.ordenar(vetor);
-
-        SelectionSort<Integer> selectionSort = new SelectionSort<>();
-
-        Integer[] vetorSelection = selectionSort.ordenar(vetor);
-
-        MergeSort<Integer> mergeSort = new MergeSort<>();
-
-        Integer[] vetorMerge = mergeSort.ordenar(vetor);
-
-        System.out.println("\nSistema no vetor ordenado pelo método BubbleSort:");
-        System.out.println("Comparações: " + bolha.getComparacoes());
-        System.out.println("Movimentações: " + bolha.getMovimentacoes());
-        System.out.println("Tempo de ordenação (ms): " + bolha.getTempoOrdenacao());
-        
-        System.out.println("\n----------------------------------------------------");
-        System.out.println("\nSistema no vetor ordenado pelo método InsertonSort:");
-        System.out.println("Comparações: " + insertSort.getComparacoes());
-        System.out.println("Movimentações: " + insertSort.getMovimentacoes());
-        System.out.println("Tempo de ordenação (ms): " + insertSort.getTempoOrdenacao());
-        
-        System.out.println("\n----------------------------------------------------");
-        System.out.println("\nSistema no vetor ordenado pelo método Selectionsort:");
-        System.out.println("Comparações: " + selectionSort.getComparacoes());
-        System.out.println("Movimentações: " + selectionSort.getMovimentacoes());
-        System.out.println("Tempo de ordenação (ms): " + selectionSort.getTempoOrdenacao());
--
-        System.out.println("\n----------------------------------------------------");
-        System.out.println("\nSistema no vetor ordenado pelo método Mergesort:");
-        System.out.println("Comparações: " + mergeSort.getComparacoes());
-        System.out.println("Movimentações: " + mergeSort.getMovimentacoes());
-        System.out.println("Tempo de ordenação (ms): " + mergeSort.getTempoOrdenacao());
+            while (opcao != 0) {
+                System.out.println("\n=========================================");
+                System.out.println("      SISTEMA DE AVALIAÇÃO DE MÉTODOS     ");
+                System.out.println("=========================================");
+                System.out.println(" [3] BubbleSort");
+                System.out.println(" [4] InsertionSort");
+                System.out.println(" [5] SelectionSort");
+                System.out.println(" [6] MergeSort");
+                System.out.println("  Sair do Programa");
+                System.out.print("\n Escolha o método que deseja utilizar: ");
+                
+                opcao = teclado.nextInt();
+                IOrdenador<Integer> ordenador = null;
+                
+                switch (opcao) {
+                    case 1: ordenador = new BubbleSort<>(); break;
+                    case 2: ordenador = new InsertionSort<>(); break;
+                    case 3: ordenador = new SelectionSort<>(); break;
+                    case 4: ordenador = new MergeSort<>(); break;
+                    case 0: System.out.println("\nEncerrando sistema..."); continue;
+                    default: System.out.println("\nOpção inválida! Tente novamente."); continue;
+                }
+                if (ordenador != null) {
+                    Integer[] vetorParaTeste = vetorBase.clone();
+                    ordenador.ordenar(vetorParaTeste);
+    
+                    System.out.println("\n>>> RESULTADOS DA ORDENAÇÃO <<<");
+                    System.out.println("-----------------------------------------");
+                    System.out.printf(" Método:         %s\n", ordenador.getClass().getSimpleName());
+                    System.out.printf(" Comparações:    %,d\n", ordenador.getComparacoes());
+                    System.out.printf(" Movimentações:  %,d\n", ordenador.getMovimentacoes());
+                    System.out.printf(" Tempo Gasto:    %.4f ms\n", ordenador.getTempoOrdenacao());
+                    System.out.println("-----------------------------------------");
+                }
+            }
+        }
+        teclado.close();
     }
 }
