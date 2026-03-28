@@ -36,7 +36,6 @@ public class MergeSort<T extends Comparable<T>> implements IOrdenador<T> {
     @Override
     public T[] ordenar(T[] dados) {
         T[] dadosOrdenados = Arrays.copyOf(dados, dados.length);
-        int tamanho = dadosOrdenados.length;
         iniciar();
         mergeSort(dadosOrdenados, 0, dadosOrdenados.length - 1);
         terminar();

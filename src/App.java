@@ -48,12 +48,13 @@ public class App {
                 System.out.println("\n=========================================");
                 System.out.println("      SISTEMA DE AVALIAÇÃO DE MÉTODOS     ");
                 System.out.println("=========================================");
-                System.out.println(" [3] BubbleSort");
-                System.out.println(" [4] InsertionSort");
-                System.out.println(" [5] SelectionSort");
-                System.out.println(" [6] MergeSort");
-                System.out.println("  Sair do Programa");
-                System.out.print("\n Escolha o método que deseja utilizar: ");
+                System.out.println(" [1] BubbleSort");
+                System.out.println(" [2] InsertionSort");
+                System.out.println(" [3] SelectionSort");
+                System.out.println(" [4] MergeSort");
+                System.out.println(" [5] Sair do Programa");
+                System.out.println("-----------------------------------------");
+                System.out.print("Escolha o método que deseja utilizar: ");
                 
                 opcao = teclado.nextInt();
                 IOrdenador<Integer> ordenador = null;
@@ -63,13 +64,14 @@ public class App {
                     case 2: ordenador = new InsertionSort<>(); break;
                     case 3: ordenador = new SelectionSort<>(); break;
                     case 4: ordenador = new MergeSort<>(); break;
-                    case 0: System.out.println("\nEncerrando sistema..."); continue;
+                    case 5: System.out.println("\nEncerrando sistema..."); continue;
                     default: System.out.println("\nOpção inválida! Tente novamente."); continue;
                 }
                 if (ordenador != null) {
                     Integer[] vetorParaTeste = vetorBase.clone();
                     ordenador.ordenar(vetorParaTeste);
-    
+
+                    System.out.println("-----------------------------------------");
                     System.out.println("\n>>> RESULTADOS DA ORDENAÇÃO <<<");
                     System.out.println("-----------------------------------------");
                     System.out.printf(" Método:         %s\n", ordenador.getClass().getSimpleName());
