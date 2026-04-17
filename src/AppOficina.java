@@ -38,6 +38,8 @@ public class AppOficina {
     static int quantProdutos = 0;
     static String nomeArquivoDados = "produtos.txt";
     static IOrdenador<Produto> ordenador;
+    static Produto[] produtosPorID;
+    static Produto[] produtosPorDescricao;
 
     // #region utilidades
     static Scanner teclado;
@@ -124,18 +126,28 @@ public class AppOficina {
         return dadosCarregados;
     }
 
-
     static Produto localizarProduto() {
         cabecalho();
         System.out.println("Localizando um produto");
-        int numero = lerNumero("Digite o identificador do produto", Integer.class);
-        Produto localizado = null;
-        
-        for (int i = 0; i < quantProdutos && localizado == null; i++) {
-            if (produtos[i].hashCode() == numero)
-                localizado = produtos[i];
+        System.out.println("1 - Por ID (Código)");
+        System.out.println("2 - Por Descrição");
+        int criterio = lerNumero("Escolha o critério de busca", Integer.class);
+    
+        Produto alvo = new Produto();
+        int indice = -1;
+    
+        if (criterio == 1) {
+            int id = lerNumero("Digite o ID", Integer.class);
+            alvo.setID(id);
+            indice = Arrays.binarySearch(produtosPorID, alvo, new ComparadorPorCodigo());
+            return (indice >= 0) ? produtosPorID[indice] : null;
+        } else {
+            System.out.print("Digite a descrição: ");
+            String desc = teclado.nextLine();
+            alvo.setDescricao(desc);
+            indice = Arrays.binarySearch(produtosPorDescricao, alvo, new ComparadorPadrao());
+            return (indice >= 0) ? produtosPorDescricao[indice] : null;
         }
-        return localizado;
     }
 
     private static void mostrarProduto(Produto produto) {
@@ -179,7 +191,7 @@ public class AppOficina {
             int opcaoCriterio = exibirMenuComparadores();
             java.util.Comparator<Produto> comparadorEscolhido = switch (opcaoCriterio) {
                 case 2  -> new ComparadorPorCodigo();
-                default -> new ComparadorPadr();
+                default -> new ComparadorPadrao();
             };
             Produto[] dadosOrdenados = ordenadorEscolhido.ordenar(produtos, comparadorEscolhido);
             verificarSubstituicao(produtos, dadosOrdenados);
@@ -208,12 +220,18 @@ public class AppOficina {
 
     public static void main(String[] args) {
         teclado = new Scanner(System.in);
-        
         produtos = carregarProdutos(nomeArquivoDados);
-        embaralharProdutos();
-
+    
+        if (produtos != null) {
+            produtosPorID = Arrays.copyOf(produtos, quantProdutos);
+            produtosPorDescricao = Arrays.copyOf(produtos, quantProdutos);
+            IOrdenador<Produto> ordenadorInterno = new Mergesort<>();
+            ordenadorInterno.ordenar(produtosPorID, new ComparadorPorCodigo());
+            ordenadorInterno.ordenar(produtosPorDescricao, new ComparadorPadrao());
+            embaralharProdutos();
+        }
+    
         int opcao = -1;
-        
         do {
             opcao = exibirMenuPrincipal();
             switch (opcao) {
@@ -225,7 +243,7 @@ public class AppOficina {
                 case 0 -> System.out.println("FLW VLW OBG VLT SMP.");
             }
             pausa();
-        }while (opcao != 0);
+        } while (opcao != 0);
         teclado.close();
     }
 }

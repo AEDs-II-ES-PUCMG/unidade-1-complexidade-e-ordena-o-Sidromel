@@ -44,15 +44,13 @@ public abstract class Produto implements Comparable<Produto> {
      * @param estoqueMinimo Estoque mínimo (mínimo 0)
      * @param validade Data de validade passada como parâmetro
      */
-    private void init(String desc, double precoCusto, double margemLucro){
-               
+    private void init(String desc, double precoCusto, double margemLucro) {
         if(desc.length()<3 ||precoCusto<=0||margemLucro<=0)
             throw new IllegalArgumentException("Valores inválidos para o produto");
         descricao = desc;
         this.precoCusto = precoCusto;
         this.margemLucro = margemLucro;
         idProduto = ultimoID++;
-
     }
 
     /**
