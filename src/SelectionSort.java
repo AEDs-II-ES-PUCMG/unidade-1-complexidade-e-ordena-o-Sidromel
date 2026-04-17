@@ -7,7 +7,7 @@ public class SelectionSort<T extends Comparable<T>> implements IOrdenador<T>{
     private long comparacoes;
 	private long movimentacoes;
 	private LocalDateTime inicio;
-	private LocalDateTime termino;	
+	private LocalDateTime termino;
 	
 	public SelectionSort() {
 		comparacoes = 0;
@@ -35,7 +35,7 @@ public class SelectionSort<T extends Comparable<T>> implements IOrdenador<T>{
 				}
 			}
 			swap(posReferencia, posMenor, dadosOrdenados);
-		}	
+		}
 		termino = LocalDateTime.now();
 
 		return dadosOrdenados;
